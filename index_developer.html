@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .result {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Number Guessing Game</h1>
+    <p>I'm thinking of a number between 1 and 100.</p>
+    <input type="number" id="guess" placeholder="Enter your guess" />
+    <button onclick="checkGuess()">Guess</button>
+    <div class="result" id="result"></div>
+
+    <script>
+        // JavaScript code for the game
+        let numberToGuess = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+        let numberToGuess showDebug;
+
+        // Function to check the guess
+        function checkGuess() {
+            let guess = parseInt(document.getElementById('guess').value);
+            let result = document.getElementById('result');
+            attempts++;
+
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                result.textContent = 'Please enter a valid number between 1 and 100.';
+            } else if (guess === numberToGuess) {
+                result.textContent = `Congratulations! You guessed the number ${numberToGuess} in ${attempts} attempts.`;
+            } else if (guess < numberToGuess) {
+                result.textContent = 'Too low! Try guessing higher.';
+            } else {
+                result.textContent = 'Too high! Try guessing lower.';
+            }
+        }
+
+        // Activate guess button on Enter key press
+        document.getElementById("guess").addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) { // 13 is the Enter key code
+                event.preventDefault();
+                checkGuess();
+            }
+        });
+    </script>
+</body>
+</html>
